@@ -1,5 +1,5 @@
-const loadCountries = () =>{
-    fetch('https://restcountries.com/v3.1/all')
+const loadCountries = (search) =>{
+    fetch(`https://restcountries.com/v3.1/name/${search}`)
     .then(res => res.json())
     .then(data => displayCountries(data));
 }
@@ -14,6 +14,7 @@ const displayCountries = countries =>{
     */
 
     const countryContainer = document.getElementById('country-container');
+    countryContainer.innerHTML="";
     countries.map(country=>{
         const countryDiv = document.createElement('div');
         countryDiv.classList.add('country');
@@ -45,4 +46,15 @@ const displayCountryDetails = country =>{
 }
 
 
-loadCountries();
+//search
+//first url ke dinamic korte hobe
+const searchCountry=()=>{
+    const searchfield = document.getElementById('search-field')
+    const searchText= searchfield.value ;
+    loadCountries(searchText);
+    searchfield.value= "";
+    
+}
+
+
+loadCountries('a');
